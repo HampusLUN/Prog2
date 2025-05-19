@@ -1,7 +1,7 @@
 """ MA3.py
 
-Student:
-Mail:
+Student: Hampus Lundgren
+Mail: hampus.lundgren.4847@student.uu.se
 Reviewed by:
 Date reviewed:
 
@@ -44,7 +44,6 @@ def approximate_pi(n): # Ex1
     #plt.show()
     return pi
 
-
 def sphere_volume(n, d): #Ex2, approximation
     #n is the number of points
     # d is the number of dimensions of the sphere 
@@ -58,7 +57,6 @@ def hypersphere_exact(d): #Ex2, real value
     # d is the number of dimensions of the sphere 
     return m.pi**(d/2)/m.gamma(d/2+1)
 
-
 #Ex3: parallel code - parallelize for loop
 def sphere_volume_parallel1(n,d,np=10):
     # n is the number of points
@@ -71,8 +69,6 @@ def sphere_volume_parallel1(n,d,np=10):
             volumes.append(sphere_volume(n,d))
         #volumes = list(ex.map(sphere_volume(n,d), range(np)))
     stop = pc()
-    #print(f"Parallel time: {round(stop-start, 2)} seconds")
-    #print(volumes)
     return mean(volumes)
 
 #Ex4: parallel code - parallelize actual computations by splitting data
@@ -80,7 +76,14 @@ def sphere_volume_parallel2(n,d,np=10):
     #n is the number of points
     # d is the number of dimensions of the sphere
     #np is the number of processes
-    return 1
+    start = pc()
+    volumes = []
+    with future.ProcessPoolExecutor() as ex:
+        for _ in range (np):
+            volumes.append(sphere_volume(n,d))
+        #volumes = list(ex.map(sphere_volume(n,d), range(np)))
+    stop = pc()
+    return mean(volumes)
     
 def main():
     #Ex1
@@ -92,16 +95,14 @@ def main():
     n = 100000
     d = 2
     sphere_volume(n,d)
-    print(f"Actual volume of {d} dimentional sphere = {hypersphere_exact(d)}")
+    print("\n")
+    print(f"EX2: Actual volume of {d} dimentional sphere = {hypersphere_exact(d)}")
     print(f"Approximated volume of {d} dimentional sphere = {sphere_volume(n, d)}")
-
-
     n = 100000
     d = 11
     sphere_volume(n,d)
     print(f"Actual volume of {d} dimentional sphere = {hypersphere_exact(d)}")
     print(f"Approximated volume of {d} dimentional sphere = {sphere_volume(n, d)}")
-
 
     #Ex3
     n = 100000
@@ -112,25 +113,23 @@ def main():
     for y in range (iterations):
         volumes.append(sphere_volume(n,d))
     stop = pc()
-    # print("\n")
-    # print(f"Ex3: Sequential time of {d} and {n}: {stop-start}")
-    # print(f"Average volume for 11-dim sphere volume: {sum(volumes)/iterations}")
-    # print("What is parallel time?")
-
-
-    # print(f"Parallel process took {sphere_volume_parallel1(n,d,np=10)} seconds")
-
+    print("\n")
+    print(f"Ex3: Sequential time of {d} and {n}: {stop-start}")
+    print(f"Average volume for 11-dim sphere volume: {sum(volumes)/iterations}")
+    print("What is parallel time?")
+    print(f"Parallel process took {sphere_volume_parallel1(n,d,np=10)} seconds")
 
     #Ex4
-    # n = 1000000
-    # d = 11
-    # start = pc()
-    # sphere_volume(n,d)
-    # stop = pc()
-    # print(f"Ex4: Sequential time of {d} and {n}: {stop-start}")
-    # print("What is parallel time?")
+    n = 1000000
+    d = 11
+    start = pc()
+    sphere_volume(n,d)
+    stop = pc()
+    print("\n")
+    print(f"Ex4: Sequential time of {d} and {n}: {stop-start}")
+    print("What is parallel time?")
+    print(f"Parallel process took {sphere_volume_parallel2(n,d,np=10)} seconds")
 
-    
     
 
 if __name__ == '__main__':
