@@ -13,6 +13,8 @@ import concurrent.futures as future
 from statistics import mean 
 from time import perf_counter as pc
 import functools
+from volume_parallel import sphere_volume_parallel1, sphere_volume_parallel2
+
 
 def approximate_pi(n): # Ex1
     #n is the number of points
