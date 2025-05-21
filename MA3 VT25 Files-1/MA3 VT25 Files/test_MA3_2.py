@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
         #act_vol = hypersphere_exact(d)
         #self.assertAlmostEqual(act_vol, 1.8841038793898994)
 
-        file_path = "c:/Users/hampu/Downloads/MA3 VT25 Files-1/MA3 VT25 Files/MA3.py"  # Replace with your actual file path
+        file_path = "c:/Users/hampu/Documents/GitHub/Prog2/MA3 VT25 Files-1/MA3 VT25 Files/MA3.py"  # Replace with your actual file path
         found_higher_order = check_higher_order_functions(file_path)
         self.assertEqual(found_higher_order, True)
 
