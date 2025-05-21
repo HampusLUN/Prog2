@@ -41,7 +41,7 @@ def approximate_pi(n): # Ex1
     plt.gca().set_aspect('equal', adjustable='box')
     plt.title('Monte Carlo Approximation of Pi')
     plt.legend()
-    #plt.show()
+    plt.show()
     return pi
 
 def sphere_volume(n, d): #Ex2, approximation
@@ -95,7 +95,7 @@ def main():
     d = 11
     vol = sphere_volume(n,d)
     print(f"Actual volume of {d} dimentional sphere = {hypersphere_exact(d)}")
-    print(f"Approximated volume of {d} dimentional sphere = {sphere_volume(n, d)}")
+    print(f"Approximated volume of {d} dimentional sphere = {vol} hejhej")
 
     #---------------Ex3
     n = 100000 # number of points (calculations)
