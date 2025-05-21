@@ -87,15 +87,13 @@ def main():
     #--------------Ex2
     n = 100000
     d = 2
-    sphere_volume(n,d)
     print("\n")
     print(f"EX2: Actual volume of {d} dimentional sphere = {hypersphere_exact(d)}")
     print(f"Approximated volume of {d} dimentional sphere = {sphere_volume(n, d)}")
     n = 100000
     d = 11
-    vol = sphere_volume(n,d)
     print(f"Actual volume of {d} dimentional sphere = {hypersphere_exact(d)}")
-    print(f"Approximated volume of {d} dimentional sphere = {vol} hejhej")
+    print(f"Approximated volume of {d} dimentional sphere = {sphere_volume(n,d)}")
 
     #---------------Ex3
     n = 100000 # number of points (calculations)
@@ -108,9 +106,9 @@ def main():
     stop = pc()
     print("\n")
     print(f"Ex3: Sequential time of {d} and {n}: {stop-start}")
-    print(f"Average volume for 11-dim sphere volume: {sum(volumes)/iterations}")
+    print(f"Average volume for 11-dim sphere volume: {mean(volumes)}")
     start = pc()
-    vol = sphere_volume_parallel1(n,d,np=10)
+    sphere_volume_parallel1(n,d,np=10)
     stop = pc()
     print(f"Parallel process took {stop-start} seconds")
 
@@ -125,7 +123,7 @@ def main():
     start = pc()
     sphere_volume_parallel2(n,d,np=10)
     stop = pc()
-    print(f"Parallel process took {stop-start} seconds")
+    print(f"Parallel process took {(stop-start)} seconds")
 
     
 if __name__ == '__main__':
